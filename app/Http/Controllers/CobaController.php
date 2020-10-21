@@ -1,29 +1,33 @@
 <?php
 
 namespace App\Http\Controllers;
-
+Use App\Models\Friends;
 use Illuminate\Http\Request;
 
 class CobaController extends Controller
 {
-   public function index ()
+
+   public function index()
    {
-       return 'test berhasil';
-   }
-
-   public function urutan($ke)
-   {  
+    $friends = Friends::paginate(3);
     
-    $numbers = [
-        ['ke' => $ke,'nomor' => 20],
-        ['ke' => $ke,'nomor' => 30],
-        ['ke' => $ke,'nomor' => 40],
-    ];
-    
-    return view ('Urutan', compact('numbers'));
+    return view ('index', compact('friends'));
    }
+   public function create()
+   {
+    
+    return view ('create');
+   }
+   public function store(Request $request)
+    {
+        // Validate the request...
 
-public function coba($ke)
-   {       return view ('coba', ['ke' => $ke]);
+        $friends = new friends;
+
+        $friends->nama = $request->nama;
+        $friends->no_tlp = $request->no_tlp;
+        $friends->alamat = $request->alamat;
+
+        $friends->save();
    }
 }
