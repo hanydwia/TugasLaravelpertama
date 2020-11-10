@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\GroupsController;
 use App\Http\Controllers\CobaController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +23,8 @@ Route::get('/friends/{id}', [CobaController::class, 'show']);
 Route::get('/friends/{id}/edit', [CobaController::class, 'edit']);
 Route::put('/friends/{id}', [CobaController::class, 'update']);
 Route::delete('/friends/{id}', [CobaController::class, 'destroy']);
+
+Route::resources([
+    'friends' => CobaController::class,
+    'groups' => GroupsController::class,
+]);
