@@ -85,20 +85,17 @@ class GroupsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required|unique:friends|max:225',
-            'description' => 'required',
-        ]);
         
-        $g = Groups::find($id)->update([
+        $group = Groups::find($id)
+        ->update([
             'name' => $request->name,
             'description' => $request->description
         ]);
 
         return response()->json([
             'success' =>true,
-            'message' =>'Post Updated',
-            'data' => $g
+            'message' =>'Data Group Berhasil Diubah',
+            'data' => $group
         ],200);
     }
 
@@ -110,11 +107,11 @@ class GroupsController extends Controller
      */
     public function destroy($id)
     {
-        $cek = Groups::find($id)->delete();
+        $group = Groups::find($id)->delete();
         return response()->json([
             'success' => true,
-            'message' => 'Post Updated',
-            'data'    => $cek
+            'message' => 'Data Berhasil Di Hapus',
+            'data'    => $group
         ], 200);
     
     }
